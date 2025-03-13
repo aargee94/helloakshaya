@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Message</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 10px; }
+        #message-container { display: none; padding: 15px; border: 1px solid #ddd; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Password to Reveal Secret</h2>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="decryptMessage()">Unlock</button>
+
+    <div id="message-container">
+        <h3>Secret Message:</h3>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const encryptedMessage = "U2FsdGVkX19784SRvwZ0GW68ul+Zd7Gc/V4i70jGWiY="; // Replace with your encrypted text
+
+        function decryptMessage() {
+            const password = document.getElementById("password").value;
+            try {
+                const decrypted = CryptoJS.AES.decrypt(encryptedMessage, password).toString(CryptoJS.enc.Utf8);
+                if (decrypted) {
+                    document.getElementById("message").innerText = decrypted;
+                    document.getElementById("message-container").style.display = "block";
+                } else {
+                    alert("Incorrect password!");
+                }
+            } catch (e) {
+                alert("Error decrypting message.");
+            }
+        }
+    </script>
+
+</body>
+</html>
