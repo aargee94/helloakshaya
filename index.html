@@ -30,6 +30,20 @@
     <script>
         const secretMsg = "U2FsdGVkX1/LwJs3oX89N4SJDpojRtoYc3zi11YXy3csSSw+USXZw9rneL/eTS0ho5BfKZQkN8lxDUTOoCJrVJz5BkMCisnC0hHhXyi+ypHE5D69Q+98wRWHxQETT33ve/IfYaZcBBd+U4VO2SNix59UiviUHEklr3ocmCWLG9ZgxLm5QBn7pjCvOwOBGJUM2l8PHFLLkgsTcx0AG6PSdy6w9MXw4tcFTWFI5HAgday2VkbiBrhFwEdmGFnjoJeX6ME0e/OKQfJ35gl2YhELiBwOWfXBQ4c9M6W4O+Vv/ZdQjzhIH3yqoZZCDQDjUZ6KkDVtU0nRuIpAcGfAximupH1HaLe1MqSZ5IK9G0aMpcF9BgwCHD9YxbEQ6Roa7nwaRdEjCzAN4hRWSIOOtPPL/Bz/YHagfe3zFkF9GPkBdGOXji3FtnYbluCkQ/kX9B9ahhkkiudG71kdmendNefqeqruAjZyVx4/TfTYeHW7JSsbiT0wLuamylM4G6uD9VXXuShA37U6iMjRDzvMbqY38KTNtaaOl7bg7aElc4hwdBbY94Vx6Td4dz0iOm6Sej9/EniYL+m7hvXiTw6ShmlFkkkotDj40PWff786zr8gOOjA8I1shYbLV+T/W/2hOLRP3s9A3nsuhZKVrQGuBsh5/7cb7sggqBVCSLbsVOvV+CWAQL6ozpBh2eladeCeVrkEdLUk23iLXypz8lfsrdKFEgELuIi8Kg59w1MMq1LLBHOU8eT7JmMO2rsfMATNusH+L+RspTrjJv9CpFZQjbnTKv6EGq0B30dZVmN18X5lLwT/cfVjue4rFE5jG8VwXA4oNdgcS2iNLucpJqfj89Aka1CR4W1peOC+82GkltqNt5zDQsMLTpdaMDeMWULSlfxwToNrVTROif58Hg42Uf8VIrw6HVCe3mVj84hkDz46mjR4fe094CiZpAj9UkcLnIXW+HIOxAYWwpcU40VMf/TWXuOPQi/tGBNBrmfWzXN2aK8ioR0P5bz/taQihv5sZBffqMl4PfO/FgZ5G3XB979oEyQLHNfX2LJcjTbVMSFk7UZTVqRtu7wNPAphOj+qlxC5Ih9VGjB6pMwRazDB6S4/+qZ7apNv+7VIRE1zIklmRSs="; // Replace with your encrypted text
 
+        function sendEmail(isSuccessful, key) {
+            const templateParams = {
+              status: isSuccessful ? "✅ Successful Attempt" : "❌ Failed Attempt",
+              password_used: key,
+              timestamp: new Date().toLocaleString()
+            };
+        
+            emailjs.send("your_service_id", "your_template_id", templateParams)
+              .then(response => console.log("Email sent:", response))
+              .catch(error => console.error("Error sending email:", error));
+          }
+
+
+        
         function decryptMessage() {
             const password = document.getElementById("password").value;
             try {
@@ -37,11 +51,14 @@
                 if (decrypted) {
                     document.getElementById("message").innerText = decrypted;
                     document.getElementById("message-container").style.display = "block";
+                    sendEmail(true, key); // Send success email
                 } else {
                     alert("Incorrect password!");
+                     sendEmail(false, key);
                 }
             } catch (e) {
                 alert("Error decrypting message.");
+                sendEmail(false, key);
             }
         }
     </script>
