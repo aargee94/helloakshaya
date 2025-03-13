@@ -81,23 +81,139 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+		
+		/* Check if this part is needed */
+		
+
+		.modal h3 {
+			margin-top: 0;
+		}
+
+		.modal button {
+			margin-top: 15px;
+			padding: 8px 15px;
+			border: none;
+			background: #0073e6;
+			color: white;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: 0.3s;
+		}
+
+		.modal button:hover {
+			background: #005bb5;
+		}
+		
+		/* Check if this part is needed */
+		
+		/* Modal Styles */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				width: auto;
+				min-width: 300px;
+				max-width: 80%;
+				background: rgba(0, 0, 0, 0.6); /* Transparent Background */
+				color: white;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+				text-align: center;
+			}
+
+			/* Modal Content - Scrollable */
+			.modal-content {
+				background: rgba(0, 0, 0, 0.8);
+				padding: 15px;
+				border-radius: 8px;
+				max-height: 300px;
+				overflow-y: auto;
+				text-align: center;
+			}
+
+			/* Close Button - X */
+			.close-btn {
+				position: absolute;
+				top: 5px;
+				right: 10px;
+				font-size: 22px;
+				font-weight: bold;
+				color: white;
+				cursor: pointer;
+				background: none;
+				border: none;
+			}
+
+			/* Overlay */
+			.overlay {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				z-index: 999;
+			}
+			
+			/* Hide Scrollbar for Webkit Browsers (Chrome, Edge, Safari) */
+			.modal-content::-webkit-scrollbar {
+				width: 8px; /* Adjust scrollbar width */
+			}
+
+			.modal-content::-webkit-scrollbar-track {
+				background: transparent; /* Transparent track */
+			}
+
+			.modal-content::-webkit-scrollbar-thumb {
+				background: rgba(255, 255, 255, 0.3); /* Light semi-transparent scrollbar */
+				border-radius: 4px; /* Rounded edges */
+			}
+
+			.modal-content::-webkit-scrollbar-thumb:hover {
+				background: rgba(255, 255, 255, 0.5); /* Slightly visible on hover */
+			}
+
+			/* Hide scrollbar in Firefox */
+			.modal-content {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+			}
+
+			
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
+
+
+
     <div class="message-box">
         <h1>Hello Akshaya</h1>
         <p>I have a message for you! 😊</p>
-        <p><strong>Your NEET SS Roll Number is the password!</strong></p>
+        <p>Your NEET SS Roll Number is the password!</p>
 
         <input type="password" id="password" placeholder="Enter your NEET SS Roll #">
         <button onclick="decryptMessage()">Unlock</button>
 
-        <div id="message-container">
-            <h3>📩 Message:</h3>
-            <p id="message"></p>
-        </div>
+        
     </div>
+			
+			<!-- Overlay -->
+			<div class="overlay" id="overlay"></div>
+
+			<!-- Modal -->
+			<div class="modal" id="popup">
+				<span class="close-btn" onclick="closeModal()">×</span>
+				<div class="modal-content">
+					<p id="popup-message"></p>
+					<button onclick="closePopup()">Close</button>
+				</div>
+			</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
@@ -122,20 +238,33 @@
             try {
                 const decrypted = CryptoJS.AES.decrypt(secretMsg, password).toString(CryptoJS.enc.Utf8);
                 if (decrypted) {
-                    document.getElementById("message").innerText = decrypted;
-                    const messageContainer = document.getElementById("message-container");
-                    messageContainer.style.display = "block";
-                    setTimeout(() => { messageContainer.style.opacity = "1"; }, 50); // Smooth transition
-                    sendEmail(true, password);
+					document.getElementById("popup-message").innerText = decrypted;
+					document.getElementById("popup").style.display = "block";
+					document.getElementById("overlay").style.display = "block"; // Show overlay
+					setTimeout(() => { popup.style.opacity = "1"; }, 50); // Smooth transition
+					sendEmail(true, password);
+					
                 } else {
-                    alert("Incorrect password!");
-                    sendEmail(false, password);
+                    alert("Incorrect Roll Number!");
+					sendEmail(false, password);
                 }
             } catch (e) {
-                alert("Error decrypting message.");
+                alert("Incorrect Roll Number..!");
                 sendEmail(false, password);
             }
         }
+		
+		function closeModal() {
+			document.getElementById("popup").style.display = "none";
+			document.getElementById("overlay").style.display = "none";
+		}
+		
+		function closePopup() {
+			document.getElementById("popup").style.display = "none";
+			document.getElementById("overlay").style.display = "none";
+		}
+		
+		document.getElementById("overlay").addEventListener("click", closeModal);
     </script>
 </body>
 </html>
