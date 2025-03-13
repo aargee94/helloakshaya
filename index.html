@@ -3,84 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Akshaya</title>
+    <title>Secret Message for Akshaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(to right, #8e44ad, #3498db);
             color: white;
             text-align: center;
-            padding: 50px;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            padding: 20px;
         }
         .message-box {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 400px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
             animation: fadeIn 1s ease-in-out;
         }
         h1 {
-            font-size: 24px;
+            font-size: 26px;
         }
         p {
             font-size: 18px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+        button {
+            padding: 12px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            border: none;
+            background: #ffcc00;
+            color: #333;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ffd633;
+        }
+        #message-container {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+            border-radius: 10px;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-         #message-container { display: none; padding: 15px; border: 1px solid #ddd; background: #f9f9f9; }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <!--
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input, button { margin: 10px; padding: 10px; }
-        #message-container { display: none; padding: 15px; border: 1px solid #ddd; background: #f9f9f9; }
-    </style>
-    -->
 </head>
 <body>
     <div class="message-box">
-         <h1>Hello Akshaya 👋</h1>
+        <h1>🔐 Hello Akshaya</h1>
         <p>I have a message for you! 😊</p>
         <p><strong>Your NEET SS Roll Number is the password!</strong></p>
-    <!--<h2>Hello Akshaya, I have a message for you.! </h2> <br> <br> <h3> Your NEET SS Roll Number is the password.! </h3> -->
-    <input type="password" id="password" placeholder="Enter ur NEET SS Roll #">
-    <button onclick="decryptMessage()">Unlock</button>
 
-    <div id="message-container">
-        <h3>Message : </h3>
-        <p id="message"></p>
+        <input type="password" id="password" placeholder="Enter your NEET SS Roll #">
+        <button onclick="decryptMessage()">🔓 Unlock</button>
+
+        <div id="message-container">
+            <h3>📩 Message:</h3>
+            <p id="message"></p>
+        </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-      emailjs.init("Ke2sfMemJxBV501VD"); // Replace with your EmailJS User ID
-    </script>
+        emailjs.init("Ke2sfMemJxBV501VD"); // Replace with your EmailJS User ID
 
-    <script>
-        const secretMsg = "U2FsdGVkX1/LwJs3oX89N4SJDpojRtoYc3zi11YXy3csSSw+USXZw9rneL/eTS0ho5BfKZQkN8lxDUTOoCJrVJz5BkMCisnC0hHhXyi+ypHE5D69Q+98wRWHxQETT33ve/IfYaZcBBd+U4VO2SNix59UiviUHEklr3ocmCWLG9ZgxLm5QBn7pjCvOwOBGJUM2l8PHFLLkgsTcx0AG6PSdy6w9MXw4tcFTWFI5HAgday2VkbiBrhFwEdmGFnjoJeX6ME0e/OKQfJ35gl2YhELiBwOWfXBQ4c9M6W4O+Vv/ZdQjzhIH3yqoZZCDQDjUZ6KkDVtU0nRuIpAcGfAximupH1HaLe1MqSZ5IK9G0aMpcF9BgwCHD9YxbEQ6Roa7nwaRdEjCzAN4hRWSIOOtPPL/Bz/YHagfe3zFkF9GPkBdGOXji3FtnYbluCkQ/kX9B9ahhkkiudG71kdmendNefqeqruAjZyVx4/TfTYeHW7JSsbiT0wLuamylM4G6uD9VXXuShA37U6iMjRDzvMbqY38KTNtaaOl7bg7aElc4hwdBbY94Vx6Td4dz0iOm6Sej9/EniYL+m7hvXiTw6ShmlFkkkotDj40PWff786zr8gOOjA8I1shYbLV+T/W/2hOLRP3s9A3nsuhZKVrQGuBsh5/7cb7sggqBVCSLbsVOvV+CWAQL6ozpBh2eladeCeVrkEdLUk23iLXypz8lfsrdKFEgELuIi8Kg59w1MMq1LLBHOU8eT7JmMO2rsfMATNusH+L+RspTrjJv9CpFZQjbnTKv6EGq0B30dZVmN18X5lLwT/cfVjue4rFE5jG8VwXA4oNdgcS2iNLucpJqfj89Aka1CR4W1peOC+82GkltqNt5zDQsMLTpdaMDeMWULSlfxwToNrVTROif58Hg42Uf8VIrw6HVCe3mVj84hkDz46mjR4fe094CiZpAj9UkcLnIXW+HIOxAYWwpcU40VMf/TWXuOPQi/tGBNBrmfWzXN2aK8ioR0P5bz/taQihv5sZBffqMl4PfO/FgZ5G3XB979oEyQLHNfX2LJcjTbVMSFk7UZTVqRtu7wNPAphOj+qlxC5Ih9VGjB6pMwRazDB6S4/+qZ7apNv+7VIRE1zIklmRSs="; // Replace with your encrypted text
+        const secretMsg = "U2FsdGVkX1/..."; // Your encrypted message here
 
         function sendEmail(isSuccessful, key) {
             const templateParams = {
-              status: isSuccessful ? "✅ Successful Attempt" : "❌ Failed Attempt",
-              password_used: key,
-              timestamp: new Date().toLocaleString()
+                status: isSuccessful ? "✅ Successful Attempt" : "❌ Failed Attempt",
+                password_used: key,
+                timestamp: new Date().toLocaleString()
             };
-        
+
             emailjs.send("service_lr61acp", "template_nde8d6k", templateParams)
-              .then(response => console.log("Email sent:", response))
-              .catch(error => console.error("Error sending email:", error));
-          }
+                .then(response => console.log("Email sent:", response))
+                .catch(error => console.error("Error sending email:", error));
+        }
 
-
-        
         function decryptMessage() {
             const password = document.getElementById("password").value;
             try {
@@ -88,10 +110,10 @@
                 if (decrypted) {
                     document.getElementById("message").innerText = decrypted;
                     document.getElementById("message-container").style.display = "block";
-                    sendEmail(true, password); // Send success email
+                    sendEmail(true, password);
                 } else {
                     alert("Incorrect password!");
-                     sendEmail(false, password);
+                    sendEmail(false, password);
                 }
             } catch (e) {
                 alert("Error decrypting message.");
@@ -99,6 +121,5 @@
             }
         }
     </script>
-    </div>
 </body>
 </html>
