@@ -24,12 +24,12 @@
     </div>
 
     <script>
-        const encryptedMessage = "U2FsdGVkX19784SRvwZ0GW68ul+Zd7Gc/V4i70jGWiY="; // Replace with your encrypted text
+        const secMsg = "U2FsdGVkX1/6Obj1gapCSYaC6yJRc+GaEmkOy6cGUFVnNJC1tTMjloYYWeeMwmeYEewMuIZ9MbmHFgQd1OcPds4IkhPbZLjKsXrPp4wsMJz06mVTwJfnCkdiQvYaYd/Qyb5k86Pte+E+4P0SeBnrcnjoGsrLyTN9mSo0REZT1c1D9rb6b/sDhdKB8bIGoEOrUHbFw9UgmV3FBtnrk8B/w8B3vnvBW5Qb1c7T1U1pOZVjmRkUtxOmTqNIOrg8iZSHMHsL0wt+Ehr65TPx/0NQGILa0yAgaxTzcexgSla8AnBTGsCnO9+eDDEJiXiYYpIt1Tn83joLzOUeR3NxnMgkufzqQlcYBcbcTqO9OrZodHhmJq+9U+NHJCj8w4FKM6/bVQkDXmbNLSMvhtPsPd8B5oq4AVsPPGnYy8NTm5RKbGRrFx8/G6zWw226kdDGtYz7aLZRYkmukbeorWV76hrvqy8TQbr+u4A23ipnshraaJIWiCgrUV/tr79RHDgwhlwIjXMBr3OnfHOw5NdvDsDKvtVW8wGtOSwBKaoBCBP0VY5CmeXzBrTpLQ6pCeM7flewlqp/3lKARO1abmqqC2jgzX42AVvveAQxa8XsJ72JH3R8QE4nUL2WX4PLS/+0EnG0RRKd7Yai4lIXYKo6mgI1LefZU6s7V/LelXYvHsPdpK8d5sbl2FmRFOzQRQlVgQ6390veSpYi1pIDC02bg28udiqP0rRLrXxrGi9ezUnIIMeSH3l3lO41TZKxq1JHHr1g05K06JdMTBvdlkH2hKhwKUFIZMM6MAQ24lyQ5LccpK4yEcjfoxd8JX9P2SxividxUu+fYsY/SAB2F9DQT7KteqN8jCZ1wjXscRUIExXBro0asXVMn2U8RO6bGxOB6qcCgEX98THI+Jj55meE0E6/lvHwWsuOmTU3EakGe9b8Tpq0AgwwQ61QcG4mXSjfsg/WsKvvYurjnI9QrPOvw25xJfeuWLMn6MJhQJ5yjaL+SkkFWn0w8VBhrCdAkWzmr4Jnisng89oeks4ZVunRLp/x4ZZFvhvCTTm0JIuYv074UBjMVdnwFalGHb/WjNdLrPSr"; // Replace with your encrypted text
 
         function decryptMessage() {
             const password = document.getElementById("password").value;
             try {
-                const decrypted = CryptoJS.AES.decrypt(encryptedMessage, password).toString(CryptoJS.enc.Utf8);
+                const decrypted = CryptoJS.AES.decrypt(secMsg, password).toString(CryptoJS.enc.Utf8);
                 if (decrypted) {
                     document.getElementById("message").innerText = decrypted;
                     document.getElementById("message-container").style.display = "block";
