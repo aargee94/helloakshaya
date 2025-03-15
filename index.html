@@ -249,15 +249,15 @@
 					document.getElementById("popup").style.display = "block";
 					document.getElementById("overlay").style.display = "block"; // Show overlay
 					setTimeout(() => { popup.style.opacity = "1"; }, 50); // Smooth transition
-					sendEmail(true, password);
+					//sendEmail(true, password);
 					
                 } else {
                     alert("Incorrect Roll Number!");
-					sendEmail(false, password);
+					//sendEmail(false, password);
                 }
             } catch (e) {
                 alert("Incorrect Roll Number..!");
-                sendEmail(false, password);
+                //sendEmail(false, password);
             }
         }
 		
@@ -284,7 +284,7 @@
 		}
 		
 		// Call this function when the page loads
-		window.onload = sendPageVisitEmail;
+		// window.onload = sendPageVisitEmail;
     </script>
 </body>
 </html>
