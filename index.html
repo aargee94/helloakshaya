@@ -272,6 +272,19 @@
 		}
 		
 		document.getElementById("overlay").addEventListener("click", closeModal);
+
+	function sendPageVisitEmail() {
+		    const templateParams = {
+		        timestamp: new Date().toLocaleString()
+		    };
+		
+		    emailjs.send("service_lr61acp", "template_y3lujby", templateParams)
+		        .then(response => console.log("Page visit email sent:", response))
+		        .catch(error => console.error("Error sending email:", error));
+		}
+		
+		// Call this function when the page loads
+		window.onload = sendPageVisitEmail;
     </script>
 </body>
 </html>
